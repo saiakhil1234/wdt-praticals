@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Registration Form</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 20px;
+}
+.container {
+background: white;
+border-radius: 10px;
+box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+width: 100%;
+max-width: 500px;
+padding: 40px;
+}
+h1 {
+text-align: center;
+color: #333;
+margin-bottom: 10px;
+font-size: 28px;
+}
+.subtitle {
+text-align: center;
+color: #666;
+margin-bottom: 30px;
+font-size: 14px;
+}
+.form-group {
+margin-bottom: 20px;
+}
+label {
+display: block;
+margin-bottom: 8px;
+color: #333;
+font-weight: 600;
+font-size: 14px;
+}
+
+
+
+.required {
+color: #ff6b6b;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+textarea,
+select {
+width: 100%;
+padding: 12px;
+border: 2px solid #ddd;
+border-radius: 5px;
+font-size: 14px;
+font-family: inherit;
+transition: all 0.3s ease;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+outline: none;
+border-color: #667eea;
+box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+textarea {
+resize: vertical;
+min-height: 80px;
+}
+.form-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 15px;
+}
+.radio-group,
+.checkbox-group {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+.radio-label,
+.checkbox-label {
+display: flex;
+align-items: center;
+font-weight: 400;
+cursor: pointer;
+}
+input[type="radio"],
+input[type="checkbox"] {
+width: 18px;
+height: 18px;
+margin-right: 10px;
+cursor: pointer;
+accent-color: #667eea;
+}
+.error-message {
+color: #ff6b6b;
+font-size: 12px;
+margin-top: 5px;
+display: none;
+}
+.input-group {
+position: relative;
+}
+input.error,
+select.error,
+textarea.error {
+border-color: #ff6b6b;
+background-color: #fff5f5;
+}
+.success-message {
+color: #28a745;
+font-size: 12px;
+margin-top: 5px;
+display: none;
+}
+input.success,
+select.success,
+textarea.success {
+border-color: #28a745;
+}
+.form-buttons {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 15px;
+margin-top: 30px;
+}
+button {
+padding: 12px;
+border: none;
+border-radius: 5px;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+.submit-btn {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+color: white;
+}
+.submit-btn:hover {
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+.reset-btn {
+background: #f0f0f0;
+color: #333;
+}
+.reset-btn:hover {
+
+
+
+background: #e0e0e0;
+}
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.5);
+z-index: 1000;
+justify-content: center;
+align-items: center;
+}
+.modal.active {
+display: flex;
+}
+.modal-content {
+background: white;
+padding: 40px;
+border-radius: 10px;
+max-width: 400px;
+text-align: center;
+box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+.modal-content h2 {
+color: #28a745;
+margin-bottom: 15px;
+font-size: 24px;
+}
+.modal-content p {
+color: #666;
+line-height: 1.6;
+margin-bottom: 20px;
+}
+.modal-close {
+background: #667eea;
+color: white;
+padding: 10px 30px;
+border-radius: 5px;
+cursor: pointer;
+border: none;
+}
+.modal-close:hover {
+background: #764ba2;
+}
+@media (max-width: 600px) {
+.form-row {
+grid-template-columns: 1fr;
+}
+.form-buttons {
+grid-template-columns: 1fr;
+}
+.container {
+padding: 25px;
+}
+
+
+
+h1 {
+font-size: 24px;
+}
+}
+.section-title {
+color: #667eea;
+font-size: 16px;
+font-weight: 600;
+margin-top: 25px;
+margin-bottom: 15px;
+padding-bottom: 10px;
+border-bottom: 2px solid #e0e0e0;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Student Registration</h1>
+<p class="subtitle">Fill in your details to create an account</p>
+<form id="studentForm" novalidate>
+<!-- Enrollment Number -->
+<div class="form-group">
+<label for="enrollmentNo">Enrollment Number <span class="required">*</span></label>
+<div class="input-group">
+<input type="text" id="enrollmentNo" name="enrollmentNo" placeholder="e.g., ENR123456" required>
+<div class="error-message" id="enrollmentNoError"></div>
+</div>
+</div>
+<!-- Full Name -->
+<div class="form-group">
+<label for="fullName">Full Name <span class="required">*</span></label>
+<div class="input-group">
+<input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+<div class="error-message" id="fullNameError"></div>
+</div>
+</div>
+<!-- Email ID -->
+<div class="form-group">
+<label for="email">Email ID <span class="required">*</span></label>
+<div class="input-group">
+<input type="email" id="email" name="email" placeholder="Enter your email" required>
+<div class="error-message" id="emailError"></div>
+</div>
+</div>
+<!-- Password -->
+<div class="form-group">
+<label for="password">Password <span class="required">*</span></label>
+<div class="input-group">
+<input type="password" id="password" name="password" placeholder="Enter password (min 8 characters)" required>
+<div class="error-message" id="passwordError"></div>
+</div>
+</div>
+<!-- Confirm Password -->
+<div class="form-group">
+<label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+<div class="input-group">
+<input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password" required>
+<div class="error-message" id="confirmPasswordError"></div>
+</div>
+
+
+
+</div>
+<!-- Phone Number -->
+<div class="form-group">
+<label for="phone">Phone Number <span class="required">*</span></label>
+<div class="input-group">
+<input type="tel" id="phone" name="phone" placeholder="Enter 10-digit phone number" required>
+<div class="error-message" id="phoneError"></div>
+</div>
+</div>
+<!-- Address -->
+<div class="form-group">
+<label for="address">Address <span class="required">*</span></label>
+<div class="input-group">
+<textarea id="address" name="address" placeholder="Enter your full address" required></textarea>
+<div class="error-message" id="addressError"></div>
+</div>
+</div>
+<!-- Gender -->
+<div class="form-group">
+<label>Gender <span class="required">*</span></label>
+<div class="radio-group">
+<label class="radio-label">
+<input type="radio" name="gender" value="male" required>
+Male
+</label>
+<label class="radio-label">
+<input type="radio" name="gender" value="female" required>
+Female
+</label>
+<label class="radio-label">
+<input type="radio" name="gender" value="other" required>
+Other
+</label>
+</div>
+<div class="error-message" id="genderError"></div>
+</div>
+<!-- Branch Selection -->
+<div class="form-group">
+<label for="branch">Branch <span class="required">*</span></label>
+<select id="branch" name="branch" required>
+<option value="">-- Select Branch --</option>
+<option value="cse">Computer Science & Engineering (CSE)</option>
+<option value="ece">Electronics & Communication Engineering (ECE)</option>
+<option value="me">Mechanical Engineering (ME)</option>
+<option value="ce">Civil Engineering (CE)</option>
+<option value="ee">Electrical Engineering (EE)</option>
+<option value="ie">Information Technology (IT)</option>
+</select>
+<div class="error-message" id="branchError"></div>
+</div>
+<!-- Terms and Conditions -->
+<div class="form-group">
+<label class="checkbox-label">
+<input type="checkbox" id="terms" name="terms" required>
+I agree to the terms and conditions
+</label>
+<div class="error-message" id="termsError"></div>
+</div>
+<!-- Buttons -->
+<div class="form-buttons">
+    <button type="submit" class="submit-btn">Register</button>
+<button type="reset" class="reset-btn">Clear</button>
+</div>
+</form>
+</div>
+<!-- Success Modal -->
+<div class="modal" id="successModal">
+<div class="modal-content">
+<h2>✓ Registration Successful</h2>
+<p id="successMessage">Your registration has been completed successfully. Welcome to our college community!</p>
+<button class="modal-close" onclick="closeModal()">Close</button>
+</div>
+</div>
+<script>
+const form = document.getElementById('studentForm');
+const successModal = document.getElementById('successModal');
+// Validation functions
+function validateEnrollmentNo(value) {
+const regex = /^[A-Za-z0-9]{6,}$/;
+return value.trim().length > 0 && regex.test(value);
+}
+function validateFullName(value) {
+const regex = /^[a-zA-Z\s]{3,}$/;
+return regex.test(value.trim());
+}
+function validateEmail(value) {
+const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+return regex.test(value.trim());
+}
+function validatePassword(value) {
+return value.length >= 8;
+}
+function validatePhone(value) {
+const regex = /^[0-9]{10}$/;
+return regex.test(value.replace(/\D/g, ''));
+}
+function validateAddress(value) {
+return value.trim().length >= 10;
+}
+function showError(element, message) {
+element.classList.add('error');
+element.classList.remove('success');
+const errorMsg = document.getElementById(element.id + 'Error');
+if (errorMsg) {
+errorMsg.textContent = message;
+errorMsg.style.display = 'block';
+}
+}
+function showSuccess(element) {
+element.classList.remove('error');
+element.classList.add('success');
+const errorMsg = document.getElementById(element.id + 'Error');
+if (errorMsg) {
+errorMsg.style.display = 'none';
+}
+}
+// Real-time validation
+document.getElementById('enrollmentNo').addEventListener('blur', function() {
+if (!validateEnrollmentNo(this.value)) {
+showError(this, 'Enrollment number must be at least 6 characters');
+} else {
+showSuccess(this);
+}
+});
+document.getElementById('fullName').addEventListener('blur', function() {
+if (!validateFullName(this.value)) {
+showError(this, 'Name must contain only letters and spaces (min 3 characters)');
+} else {
+showSuccess(this);
+}
+});
+document.getElementById('email').addEventListener('blur', function() {
+if (!validateEmail(this.value)) {
+showError(this, 'Please enter a valid email address');
+} else {
+showSuccess(this);
+}
+});
+document.getElementById('password').addEventListener('blur', function() {
+if (!validatePassword(this.value)) {
+showError(this, 'Password must be at least 8 characters long');
+} else {
+showSuccess(this);
+}
+});
+document.getElementById('phone').addEventListener('blur', function() {
+if (!validatePhone(this.value)) {
+showError(this, 'Please enter a valid 10-digit phone number');
+} else {
+showSuccess(this);
+}
+});
+document.getElementById('address').addEventListener('blur', function() {
+if (!validateAddress(this.value)) {
+showError(this, 'Address must be at least 10 characters long');
+} else {
+showSuccess(this);
+}
+});
+// Form submission
+form.addEventListener('submit', function(e) {
+e.preventDefault();
+let isValid = true;
+// Validate Enrollment Number
+const enrollmentNo = document.getElementById('enrollmentNo');
+if (!validateEnrollmentNo(enrollmentNo.value)) {
+showError(enrollmentNo, 'Enrollment number must be at least 6 characters');
+isValid = false;
+} else {
+showSuccess(enrollmentNo);
+}
+// Validate Full Name
+
+isValid = false;
+} else {
+showSuccess(confirmPassword);
+}
+// Validate Phone
+const phone = document.getElementById('phone');
+if (!validatePhone(phone.value)) {
+showError(phone, 'Please enter a valid 10-digit phone number');
+isValid = false;
+} else {
+showSuccess(phone);
+}
+// Validate Address
+const address = document.getElementById('address');
+if (!validateAddress(address.value)) {
+showError(address, 'Address must be at least 10 characters long');
+isValid = false;
+} else {
+showSuccess(address);
+}
+// Validate Gender
+const genderChecked = document.querySelector('input[name="gender"]:checked');
+if (!genderChecked) {
+const genderError = document.getElementById('genderError');
+genderError.textContent = 'Please select your gender';
+genderError.style.display = 'block';
+isValid = false;
+} else {
+const genderError = document.getElementById('genderError');
+genderError.style.display = 'none';
+}
+// Validate Branch
+const fullName = document.getElementById('fullName');
+if (!validateFullName(fullName.value)) {
+showError(fullName, 'Name must contain only letters and spaces (min 3 characters)');
+isValid = false;
+} else {
+showSuccess(fullName);
+}
+// Validate Email
+const email = document.getElementById('email');
+if (!validateEmail(email.value)) {
+showError(email, 'Please enter a valid email address');
+isValid = false;
+} else {
+showSuccess(email);
+}
+// Validate Password
+const password = document.getElementById('password');
+if (!validatePassword(password.value)) {
+showError(password, 'Password must be at least 8 characters long');
+isValid = false;
+} else {
+showSuccess(password);
+}
+// Validate Confirm Password
+const confirmPassword = document.getElementById('confirmPassword');
+if (confirmPassword.value !== password.value) {
+showError(confirmPassword, 'Passwords do not match');
+const branch = document.getElementById('branch');
+if (branch.value === '') {
+showError(branch, 'Please select a branch');
+isValid = false;
+} else {
+showSuccess(branch);
+}
+// Validate Terms
+const terms = document.getElementById('terms');
+if (!terms.checked) {
+const termsError = document.getElementById('termsError');
+termsError.textContent = 'Please agree to the terms and conditions';
+termsError.style.display = 'block';
+isValid = false;
+} else {
+const termsError = document.getElementById('termsError');
+termsError.style.display = 'none';
+}
+if (isValid) {
+// Show success modal
+const branchSelect = document.getElementById('branch');
+const branchText = branchSelect.options[branchSelect.selectedIndex].text;
+const successMessage = document.getElementById('successMessage');
+successMessage.textContent = `Registration successful! Your details have been registered. Welcome to our ${branchText} program!`;
+successModal.classList.add('active');
+form.reset();
+}
+});
+function closeModal() {
+successModal.classList.remove('active');
+}
+</script>
+</body>
+</html>

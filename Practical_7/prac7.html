@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bus Booking & Login</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body {
+background: #f2f2f2;
+}
+/* Box for Login */
+
+.form-box { max-
+width: 420px;
+
+padding: 25px;
+margin: 40px auto;
+background: white;
+border-radius: 12px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+/* Bus Booking Box */
+
+.booking-box { max-
+width: 800px; margin:
+
+40px auto; border-
+radius: 12px; overflow:
+
+hidden;
+box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.booking-image {
+background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70') center/cover norepeat;
+height: 250px;
+}
+.booking-content {
+background: white;
+padding: 25px;
+}
+</style> </head>
+<body>
+<!-- LOGIN BOX -->
+<div class="form-box">
+<h3 class="text-center mb-3">Sign In</h3>
+<form>
+<div class="mb-3">
+<label>Username</label>
+<input type="text" class="form-control" placeholder="Enter username">
+</div>
+<div class="mb-3">
+<label>Email</label>
+<input type="email" class="form-control" placeholder="Enter email">
+</div>
+<div class="mb-3">
+<label>Password</label>
+<input type="password" class="form-control" placeholder="Enter password">
+</div>
+<button class="btn btn-primary w-100">Login</button>
+</form>
+</div>
+<!-- BUS BOOKING BOX -->
+<div class="booking-box">
+<!-- Bus Image -->
+<div class="booking-image"></div>
+<!-- Booking Form -->
+<div class="booking-content">
+<h3 class="text-center mb-3">Bus Ticket Booking</h3>
+<form>
+<div class="row g-3">
+<div class="col-md-6">
+<label>From</label>
+<input type="text" class="form-control" placeholder="Starting Point">
+</div>
+<div class="col-md-6">
+<label>To</label>
+<input type="text" class="form-control" placeholder="Destination">
+</div>
+<div class="col-md-6">
+<label>Date of Journey</label>
+<input type="date" class="form-control">
+</div>
+
+<div class="col-md-6">
+<label>No. of Seats</label>
+<input type="number" class="form-control" placeholder="1">
+</div>
+</div>
+<button class="btn btn-success mt-3 w-100">Book Now</button>
+</form>
+</div>
+</div>
+</body>
+</html>

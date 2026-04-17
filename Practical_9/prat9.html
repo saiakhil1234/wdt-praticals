@@ -1,0 +1,443 @@
+
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+ <meta charset="UTF-8"> 
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+ <title>Checkout Form - Bootstrap</title> 
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">  <style> 
+ body { 
+ background-color: #f8f9fa; 
+ padding: 40px 0; 
+ } 
+ .checkout-container { 
+ background-color: white; 
+ border-radius: 10px; 
+ box-shadow: 0 0 20px rgba(0,0,0,0.1); 
+ padding: 40px; 
+ } 
+ .section-title { 
+ font-size: 20px; 
+ font-weight: 600; 
+ margin-bottom: 25px; 
+ padding-bottom: 15px; 
+ border-bottom: 2px solid #007bff; 
+ color: #333; 
+ } 
+ .form-section { 
+ margin-bottom: 40px; 
+ } 
+ .form-label { 
+ font-weight: 500; 
+ color: #333; 
+ margin-bottom: 8px; 
+ } 
+ .form-control, .form-select { 
+ border-radius: 5px; 
+ border: 1px solid #dee2e6; 
+ padding: 10px 15px; 
+ font-size: 14px; 
+ } 
+ .form-control:focus, .form-select:focus { 
+ border-color: #007bff; 
+ box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); 
+ } 
+ .row-gap { 
+ gap: 20px; 
+ } 
+ .order-summary { 
+ background-color: #f8f9fa; 
+ border-radius: 10px; 
+ padding: 25px; 
+ margin-top: 40px; 
+ } 
+ .summary-item { 
+ display: flex; 
+ justify-content: space-between;
+
+ margin-bottom: 15px; 
+ font-size: 15px; 
+ } 
+ .summary-item.total { 
+ border-top: 2px solid #dee2e6; 
+ padding-top: 15px; 
+ font-weight: 600; 
+ font-size: 18px; 
+ color: #007bff; 
+ } 
+ .btn-checkout { 
+ background-color: #28a745; 
+ color: white; 
+ padding: 12px 30px; 
+ font-size: 16px; 
+ font-weight: 600; 
+ border: none; 
+ border-radius: 5px; 
+ width: 100%; 
+ margin-top: 20px; 
+ transition: background-color 0.3s ease; 
+ } 
+ .btn-checkout:hover { 
+ background-color: #218838; 
+ color: white; 
+ cursor: pointer; 
+ } 
+ .btn-cancel { 
+ background-color: #6c757d; 
+ color: white; 
+ padding: 12px 30px; 
+ font-size: 16px; 
+ border: none; 
+ border-radius: 5px; 
+ width: 100%; 
+ margin-top: 10px; 
+ transition: background-color 0.3s ease; 
+ } 
+ .btn-cancel:hover { 
+ background-color: #5a6268; 
+ color: white; 
+ cursor: pointer; 
+ } 
+ .payment-method { 
+ display: flex; 
+ gap: 15px; 
+ margin-bottom: 20px; 
+ } 
+ .payment-option { 
+ flex: 1; 
+ } 
+ .payment-option input[type="radio"] { 
+ margin-right: 8px; 
+ } 
+ .error-message { 
+ color: #dc3545; 
+ font-size: 13px; 
+ margin-top: 5px; 
+ display: none;
+
+ } 
+ .form-control.is-invalid { 
+ border-color: #dc3545; 
+ } 
+ </style> 
+</head> 
+<body> 
+ <div class="container"> 
+ <div class="row justify-content-center"> 
+ <div class="col-lg-8"> 
+ <div class="checkout-container"> 
+ <h1 style="text-align: center; margin-bottom: 40px; color: #333;">Checkout</h1>   
+ <form id="checkoutForm" novalidate> 
+ <!-- Customer Information --> 
+ <div class="form-section"> 
+ <h2 class="section-title">Personal Information</h2> 
+ <div class="row row-gap"> 
+ <div class="col-md-6"> 
+ <label for="firstName" class="form-label">First Name *</label> 
+ <input type="text" class="form-control" id="firstName" name="firstName" required>  <div class="error-message" id="firstNameError">Please enter a valid first name</div>  </div> 
+ <div class="col-md-6"> 
+ <label for="lastName" class="form-label">Last Name *</label> 
+ <input type="text" class="form-control" id="lastName" name="lastName" required>  <div class="error-message" id="lastNameError">Please enter a valid last name</div>  </div> 
+ </div> 
+ <div class="row row-gap" style="margin-top: 15px;"> 
+ <div class="col-md-6"> 
+ <label for="email" class="form-label">Email Address *</label> 
+ <input type="email" class="form-control" id="email" name="email" required>  <div class="error-message" id="emailError">Please enter a valid email address</div>  </div> 
+ <div class="col-md-6"> 
+ <label for="phone" class="form-label">Phone Number *</label> 
+ <input type="tel" class="form-control" id="phone" name="phone" required>  <div class="error-message" id="phoneError">Please enter a valid 10-digit phone number</div>  </div> 
+ </div> 
+ </div> 
+ <!-- Shipping Address --> 
+ <div class="form-section"> 
+ <h2 class="section-title">Shipping Address</h2> 
+ <div class="row row-gap"> 
+ <div class="col-12"> 
+ <label for="address" class="form-label">Street Address *</label> 
+ <input type="text" class="form-control" id="address" name="address" required>  <div class="error-message" id="addressError">Please enter a valid address</div>  </div> 
+ </div> 
+ <div class="row row-gap" style="margin-top: 15px;"> 
+ <div class="col-md-6"> 
+ <label for="city" class="form-label">City *</label> 
+ <input type="text" class="form-control" id="city" name="city" required>  <div class="error-message" id="cityError">Please enter a valid city</div>  </div>
+
+ <div class="col-md-3"> 
+ <label for="state" class="form-label">State *</label> 
+ <input type="text" class="form-control" id="state" name="state" required> 
+ <div class="error-message" id="stateError">Please enter a valid state</div> 
+ </div> 
+ <div class="col-md-3"> 
+ <label for="zipcode" class="form-label">Zip Code *</label> 
+ <input type="text" class="form-control" id="zipcode" name="zipcode" required>  <div class="error-message" id="zipcodeError">Please enter a valid 6-digit zip code</div>  </div> 
+ </div> 
+ <div class="row row-gap" style="margin-top: 15px;"> 
+ <div class="col-12"> 
+ <label for="country" class="form-label">Country *</label> 
+ <select class="form-select" id="country" name="country" required> 
+ <option selected disabled>Select a country</option> 
+ <option value="USA">United States</option> 
+ <option value="Canada">Canada</option> 
+ <option value="UK">United Kingdom</option> 
+ <option value="India">India</option> 
+ <option value="Australia">Australia</option> 
+ </select> 
+ <div class="error-message" id="countryError">Please select a country</div> 
+ </div> 
+ </div> 
+ </div> 
+ <!-- Payment Information --> 
+ <div class="form-section"> 
+ <h2 class="section-title">Payment Information</h2> 
+ <div class="payment-method"> 
+ <div class="payment-option"> 
+ <input type="radio" id="creditCard" name="paymentMethod" value="creditCard" checked required>  <label for="creditCard">Credit Card</label> 
+ </div> 
+ <div class="payment-option"> 
+ <input type="radio" id="debitCard" name="paymentMethod" value="debitCard" required>  <label for="debitCard">Debit Card</label> 
+ </div> 
+ <div class="payment-option"> 
+ <input type="radio" id="upi" name="paymentMethod" value="upi" required> 
+ <label for="upi">UPI</label> 
+ </div> 
+ </div> 
+ <div class="row row-gap"> 
+ <div class="col-12"> 
+ <label for="cardName" class="form-label">Name on Card *</label> 
+ <input type="text" class="form-control" id="cardName" name="cardName" required>  <div class="error-message" id="cardNameError">Please enter a valid name</div>  </div> 
+ </div> 
+ <div class="row row-gap" style="margin-top: 15px;"> 
+ <div class="col-12"> 
+ <label for="cardNumber" class="form-label">Card Number *</label> 
+ <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012  3456" required> 
+ <div class="error-message" id="cardNumberError">Please enter a valid 16-digit card number</div>  </div> 
+ </div>
+
+ <div class="row row-gap" style="margin-top: 15px;"> 
+ <div class="col-md-6"> 
+ <label for="expiry" class="form-label">Expiry Date *</label> 
+ <input type="text" class="form-control" id="expiry" name="expiry" placeholder="MM/YY" required>  <div class="error-message" id="expiryError">Please enter a valid date (MM/YY)</div>  </div> 
+ <div class="col-md-6"> 
+ <label for="cvv" class="form-label">CVV *</label> 
+ <input type="text" class="form-control" id="cvv" name="cvv" placeholder="123" required>  <div class="error-message" id="cvvError">Please enter a valid 3-4 digit CVV</div>  </div> 
+ </div> 
+ </div> 
+ <!-- Order Summary --> 
+ <div class="order-summary"> 
+ <h3 style="margin-bottom: 20px; color: #333;">Order Summary</h3> 
+ <div class="summary-item"> 
+ <span>Subtotal</span> 
+ <span>$99.99</span> 
+ </div> 
+ <div class="summary-item"> 
+ <span>Shipping</span> 
+ <span>$10.00</span> 
+ </div> 
+ <div class="summary-item"> 
+ <span>Tax</span> 
+ <span>$8.79</span> 
+ </div> 
+ <div class="summary-item total"> 
+ <span>Total</span> 
+ <span>$118.78</span> 
+ </div> 
+ </div> 
+ <!-- Action Buttons --> 
+ <button type="submit" class="btn-checkout">Complete Purchase</button> 
+ <button type="reset" class="btn-cancel">Clear Form</button> 
+ </form> 
+ </div> 
+ </div> 
+ </div> 
+ </div> 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>  <script> 
+ // Form validation 
+ const form = document.getElementById('checkoutForm'); 
+ function validateEmail(email) { 
+ const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+ return re.test(email); 
+ } 
+ function validatePhone(phone) { 
+ const re = /^[0-9]{10}$/; 
+ return re.test(phone.replace(/\D/g, '')); 
+ }
+
+ function validateZipcode(zipcode) { 
+ const re = /^[0-9]{6}$/; 
+ return re.test(zipcode); 
+ } 
+ function validateCardNumber(cardNum) { 
+ const re = /^[0-9]{16}$/; 
+ return re.test(cardNum.replace(/\s+/g, '')); 
+ } 
+ function validateCVV(cvv) { 
+ const re = /^[0-9]{3,4}$/; 
+ return re.test(cvv); 
+ } 
+ function validateExpiry(expiry) { 
+ const re = /^(0[1-9]|1[0-2])\/\d{2}$/; 
+ return re.test(expiry); 
+ } 
+ form.addEventListener('submit', function(e) { 
+ e.preventDefault(); 
+ let isValid = true; 
+ // Validate First Name 
+ const firstName = document.getElementById('firstName').value.trim(); 
+ if (firstName === '') { 
+ document.getElementById('firstNameError').style.display = 'block'; 
+ document.getElementById('firstName').classList.add('is-invalid'); 
+ isValid = false; 
+ } else { 
+ document.getElementById('firstNameError').style.display = 'none'; 
+ document.getElementById('firstName').classList.remove('is-invalid'); 
+ } 
+ // Validate Last Name 
+ const lastName = document.getElementById('lastName').value.trim(); 
+ if (lastName === '') { 
+ document.getElementById('lastNameError').style.display = 'block'; 
+ document.getElementById('lastName').classList.add('is-invalid'); 
+ isValid = false; 
+ } else { 
+ document.getElementById('lastNameError').style.display = 'none'; 
+ document.getElementById('lastName').classList.remove('is-invalid'); 
+ } 
+ // Validate Email 
+ const email = document.getElementById('email').value.trim(); 
+ if (!validateEmail(email)) { 
+ document.getElementById('emailError').style.display = 'block'; 
+ document.getElementById('email').classList.add('is-invalid'); 
+ isValid = false; 
+ } else { 
+ document.getElementById('emailError').style.display = 'none'; 
+ document.getElementById('email').classList.remove('is-invalid'); 
+ } 
+ // Validate Phone 
+ const phone = document.getElementById('phone').value.trim();
+
+ if (!validatePhone(phone)) { 
+ document.getElementById('phoneError').style.display = 'block'; 
+ document.getElementById('phone').classList.add('is-invalid'); 
+ isValid = false; 
+ } else { 
+ document.getElementById('phoneError').style.display = 'none'; 
+ document.getElementById('phone').classList.remove('is-invalid'); 
+ } 
+ // Validate Address 
+ const address = document.getElementById('address').value.trim(); 
+ if (address === '') { 
+ document.getElementById('addressError').style.display = 'block'; 
+ document.getElementById('address').classList.add('is-invalid'); 
+ isValid = false; 
+ } else { 
+ document.getElementById('addressError').style.display = 'none'; 
+ document.getElementById('address').classList.remove('is-invalid'); 
+ } 
+ // Validate City 
+ const city = document.getElementById('city').value.trim(); 
+ if (city === '') { 
+ document.getElementById('cityError').style.display = 'block'; 
+ document.getElementById('city').classList.add('is-invalid'); 
+ isValid = false; 
+ } else { 
+ document.getElementById('cityError').style.display = 'none'; 
+ document.getElementById('city').classList.remove('is-invalid'); 
+ } 
+ // Validate State 
+ const state = document.getElementById('state').value.trim(); 
+ if (state === '') { 
+ document.getElementById('stateError').style.display = 'block'; 
+ document.getElementById('state').classList.add('is-invalid'); 
+ isValid = false; 
+ } else { 
+ document.getElementById('stateError').style.display = 'none'; 
+ document.getElementById('state').classList.remove('is-invalid'); 
+ } 
+ // Validate Zipcode 
+ const zipcode = document.getElementById('zipcode').value.trim(); 
+ if (!validateZipcode(zipcode)) { 
+ document.getElementById('zipcodeError').style.display = 'block'; 
+ document.getElementById('zipcode').classList.add('is-invalid'); 
+ isValid = false; 
+ } else { 
+ document.getElementById('zipcodeError').style.display = 'none'; 
+ document.getElementById('zipcode').classList.remove('is-invalid'); 
+ } 
+ // Validate Country 
+ const country = document.getElementById('country').value; 
+ if (country === '' || country === null) { 
+ document.getElementById('countryError').style.display = 'block'; 
+ document.getElementById('country').classList.add('is-invalid'); 
+ isValid = false;
+
+ } else { 
+ document.getElementById('countryError').style.display = 'none'; 
+ document.getElementById('country').classList.remove('is-invalid'); 
+ } 
+ // Validate Card Name 
+ const cardName = document.getElementById('cardName').value.trim(); 
+ if (cardName === '') { 
+ document.getElementById('cardNameError').style.display = 'block'; 
+ document.getElementById('cardName').classList.add('is-invalid'); 
+ isValid = false; 
+ } else { 
+ document.getElementById('cardNameError').style.display = 'none'; 
+ document.getElementById('cardName').classList.remove('is-invalid'); 
+ } 
+ // Validate Card Number 
+ const cardNumber = document.getElementById('cardNumber').value.trim(); 
+ if (!validateCardNumber(cardNumber)) { 
+ document.getElementById('cardNumberError').style.display = 'block'; 
+ document.getElementById('cardNumber').classList.add('is-invalid'); 
+ isValid = false; 
+ } else { 
+ document.getElementById('cardNumberError').style.display = 'none'; 
+ document.getElementById('cardNumber').classList.remove('is-invalid'); 
+ } 
+ // Validate Expiry 
+ const expiry = document.getElementById('expiry').value.trim(); 
+ if (!validateExpiry(expiry)) { 
+ document.getElementById('expiryError').style.display = 'block'; 
+ document.getElementById('expiry').classList.add('is-invalid'); 
+ isValid = false; 
+ } else { 
+ document.getElementById('expiryError').style.display = 'none'; 
+ document.getElementById('expiry').classList.remove('is-invalid'); 
+ } 
+ // Validate CVV 
+ const cvv = document.getElementById('cvv').value.trim(); 
+ if (!validateCVV(cvv)) { 
+ document.getElementById('cvvError').style.display = 'block'; 
+ document.getElementById('cvv').classList.add('is-invalid'); 
+ isValid = false; 
+ } else { 
+ document.getElementById('cvvError').style.display = 'none'; 
+ document.getElementById('cvv').classList.remove('is-invalid'); 
+ } 
+ if (isValid) { 
+ alert('Thank you for your purchase! Your order has been placed successfully.'); 
+ form.reset(); 
+ } 
+ }); 
+ // Format card number input 
+ document.getElementById('cardNumber').addEventListener('input', function(e) { 
+ let value = e.target.value.replace(/\s+/g, ''); 
+ let formattedValue = value.replace(/(\d{4})/g, '$1 ').trim();
+
+ e.target.value = formattedValue; 
+ }); 
+ // Format expiry date 
+ document.getElementById('expiry').addEventListener('input', function(e) { 
+ let value = e.target.value.replace(/\D/g, ''); 
+ if (value.length >= 2) { 
+ value = value.substring(0, 2) + '/' + value.substring(2, 4); 
+ } 
+ e.target.value = value; 
+ }); 
+ // Limit CVV to 4 digits 
+ document.getElementById('cvv').addEventListener('input', function(e) { 
+ e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4); 
+ }); 
+ </script> 
+</body> 
+</html> 
+
+
